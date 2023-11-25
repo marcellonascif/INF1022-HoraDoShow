@@ -20,6 +20,9 @@ FILE *output;
 %token RECEBA DEVOLVA VIRG EQUAL ADD 
 %token HORADOSHOW
 %token AQUIACABOU
+%token EXECUTE
+%token VEZES
+%token FIMEXE
 
 
 %type <sval> program 
@@ -81,11 +84,11 @@ cmds: | cmds cmd {
     free($2);
 }
 | cmd {
-    $$ = $1
+    $$ = $1;
 };
 
 cmd : 
-| ID EQUAL ID {
+ID EQUAL ID {
     char *buf = malloc(strlen($1) + 3 + strlen($3)+3);
     strcat(buf,$1);
     strcat(buf, " = ");
@@ -128,7 +131,22 @@ cmd :
     free($1);
     free($3);
     free($5);
+} 
+| EXECUTE cmds VEZES ID FIMEXE {
+    char *loop = malloc(100);
+    sprintf(loop,"for(int i = 0; i < %s; i++){\n%s}",$4,$2);
+    $$ = strcat(loop,"");
+    free($2);
+    free($4);
+}
+| EXECUTE cmds VEZES INT FIMEXE {
+    char *loop = malloc(100);
+    sprintf(loop,"for(int i = 0; i < %s; i++){\n%s}",$4,$2);
+    $$ = strcat(loop,"");
+    free($2);
+    free($4);
 };
+
 
 
 %%

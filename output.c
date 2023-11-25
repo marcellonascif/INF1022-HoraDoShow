@@ -4,7 +4,10 @@ int X;
 int Y;
 int Z;
 Z = Z + 1;
-Z = Z + 2;
-
+for(int i = 0; i < 3; i++){
+Z = Z + 1;
+Y = Y + 1;
+X = 1;
+}
 return Z;
 }

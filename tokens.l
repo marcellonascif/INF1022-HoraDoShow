@@ -7,6 +7,9 @@ RECEBA { return RECEBA; }
 DEVOLVA { return DEVOLVA; }
 HORADOSHOW { return HORADOSHOW; }
 AQUIACABOU { return AQUIACABOU; }
+EXECUTE { return EXECUTE; }
+VEZES { return VEZES; }
+FIMEXE { return FIMEXE; }
 \+ { return ADD; }
 , { return VIRG; }
 = { return EQUAL; }

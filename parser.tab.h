@@ -47,7 +47,10 @@
      EQUAL = 263,
      ADD = 264,
      HORADOSHOW = 265,
-     AQUIACABOU = 266
+     AQUIACABOU = 266,
+     EXECUTE = 267,
+     VEZES = 268,
+     FIMEXE = 269
    };
 #endif
 /* Tokens.  */
@@ -60,6 +63,9 @@
 #define ADD 264
 #define HORADOSHOW 265
 #define AQUIACABOU 266
+#define EXECUTE 267
+#define VEZES 268
+#define FIMEXE 269
 
 
 
@@ -72,7 +78,7 @@ typedef union YYSTYPE
   char *sval;
 }
 /* Line 1529 of yacc.c.  */
-#line 76 "parser.tab.h"
+#line 82 "parser.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
