@@ -1398,7 +1398,7 @@ yyreduce:
     {
     char *buf = malloc(strlen((yyvsp[(1) - (2)].sval)) + 2 + strlen((yyvsp[(2) - (2)].sval)));
     strcat(buf,(yyvsp[(1) - (2)].sval));
-    strcat(buf, " ");
+    strcat(buf, "");
     (yyval.sval) = strcat(buf,(yyvsp[(2) - (2)].sval));
     free((yyvsp[(1) - (2)].sval));
     free((yyvsp[(2) - (2)].sval));
@@ -1415,11 +1415,11 @@ yyreduce:
   case 9:
 #line 88 "parser.y"
     {
-    char *buf = malloc(strlen((yyvsp[(1) - (3)].sval)) + 3 + strlen((yyvsp[(3) - (3)].sval))+1);
+    char *buf = malloc(strlen((yyvsp[(1) - (3)].sval)) + 3 + strlen((yyvsp[(3) - (3)].sval))+3);
     strcat(buf,(yyvsp[(1) - (3)].sval));
     strcat(buf, " = ");
     strcat(buf,(yyvsp[(3) - (3)].sval));
-    (yyval.sval) = strcat(buf,";");
+    (yyval.sval) = strcat(buf,";\n");
     free((yyvsp[(1) - (3)].sval));
     free((yyvsp[(3) - (3)].sval));
 ;}
@@ -1428,14 +1428,14 @@ yyreduce:
   case 10:
 #line 97 "parser.y"
     {
-    char *buf = malloc(strlen((yyvsp[(1) - (5)].sval)) + 3 + strlen((yyvsp[(3) - (5)].sval)) + 3 + strlen((yyvsp[(5) - (5)].sval))+1);
+    char *buf = malloc(strlen((yyvsp[(1) - (5)].sval)) + 3 + strlen((yyvsp[(3) - (5)].sval)) + 3 + strlen((yyvsp[(5) - (5)].sval))+3);
     strcat(buf,(yyvsp[(1) - (5)].sval));
     strcat(buf, " = ");
     strcat(buf,(yyvsp[(3) - (5)].sval));
     strcat(buf," + ");
     strcat(buf,(yyvsp[(5) - (5)].sval));
     
-    (yyval.sval) = strcat(buf,";");
+    (yyval.sval) = strcat(buf,";\n");
     free((yyvsp[(1) - (5)].sval));
     free((yyvsp[(3) - (5)].sval));
     free((yyvsp[(5) - (5)].sval));
@@ -1445,11 +1445,11 @@ yyreduce:
   case 11:
 #line 110 "parser.y"
     {
-    char *buf = malloc(strlen((yyvsp[(1) - (3)].sval)) + 3 + strlen((yyvsp[(3) - (3)].sval))+1);
+    char *buf = malloc(strlen((yyvsp[(1) - (3)].sval)) + 3 + strlen((yyvsp[(3) - (3)].sval))+1+3);
     strcat(buf,(yyvsp[(1) - (3)].sval));
     strcat(buf, " = ");
     strcat(buf,(yyvsp[(3) - (3)].sval));
-    (yyval.sval) = strcat(buf,";");
+    (yyval.sval) = strcat(buf,";\n");
     free((yyvsp[(1) - (3)].sval));
     free((yyvsp[(3) - (3)].sval));
 ;}
@@ -1458,14 +1458,14 @@ yyreduce:
   case 12:
 #line 119 "parser.y"
     {
-    char *buf = malloc(strlen((yyvsp[(1) - (5)].sval)) + 3 + strlen((yyvsp[(3) - (5)].sval)) + 3 + strlen((yyvsp[(5) - (5)].sval))+1);
+    char *buf = malloc(strlen((yyvsp[(1) - (5)].sval)) + 3 + strlen((yyvsp[(3) - (5)].sval)) + 3 + strlen((yyvsp[(5) - (5)].sval))+3);
     strcat(buf,(yyvsp[(1) - (5)].sval)); 
     strcat(buf, " = ");
     strcat(buf,(yyvsp[(3) - (5)].sval));
     strcat(buf," + ");
     strcat(buf,(yyvsp[(5) - (5)].sval));
 
-    (yyval.sval) = strcat(buf,";");
+    (yyval.sval) = strcat(buf,";\n");
     free((yyvsp[(1) - (5)].sval));
     free((yyvsp[(3) - (5)].sval));
     free((yyvsp[(5) - (5)].sval));

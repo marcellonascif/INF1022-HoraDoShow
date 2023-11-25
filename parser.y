@@ -75,7 +75,7 @@ varlist : varlist VIRG ID {
 cmds: | cmds cmd {
     char *buf = malloc(strlen($1) + 2 + strlen($2));
     strcat(buf,$1);
-    strcat(buf, " ");
+    strcat(buf, "");
     $$ = strcat(buf,$2);
     free($1);
     free($2);
@@ -86,45 +86,45 @@ cmds: | cmds cmd {
 
 cmd : 
 | ID EQUAL ID {
-    char *buf = malloc(strlen($1) + 3 + strlen($3)+1);
+    char *buf = malloc(strlen($1) + 3 + strlen($3)+3);
     strcat(buf,$1);
     strcat(buf, " = ");
     strcat(buf,$3);
-    $$ = strcat(buf,";");
+    $$ = strcat(buf,";\n");
     free($1);
     free($3);
 }
 | ID EQUAL ID ADD ID {
-    char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+1);
+    char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+3);
     strcat(buf,$1);
     strcat(buf, " = ");
     strcat(buf,$3);
     strcat(buf," + ");
     strcat(buf,$5);
     
-    $$ = strcat(buf,";");
+    $$ = strcat(buf,";\n");
     free($1);
     free($3);
     free($5);
 }
 | ID EQUAL INT {
-    char *buf = malloc(strlen($1) + 3 + strlen($3)+1);
+    char *buf = malloc(strlen($1) + 3 + strlen($3)+1+3);
     strcat(buf,$1);
     strcat(buf, " = ");
     strcat(buf,$3);
-    $$ = strcat(buf,";");
+    $$ = strcat(buf,";\n");
     free($1);
     free($3);
 } 
 | ID EQUAL ID ADD INT {
-    char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+1);
+    char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+3);
     strcat(buf,$1); 
     strcat(buf, " = ");
     strcat(buf,$3);
     strcat(buf," + ");
     strcat(buf,$5);
 
-    $$ = strcat(buf,";");
+    $$ = strcat(buf,";\n");
     free($1);
     free($3);
     free($5);
