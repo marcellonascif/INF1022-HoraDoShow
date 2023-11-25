@@ -3,6 +3,6 @@ int main(void){
 int X;
 int Y;
 int Z;
-Z = Z + X;
+Z = Z + 1; Z = Z + 2;
 return Z;
 }

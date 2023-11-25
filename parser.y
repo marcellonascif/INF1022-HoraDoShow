@@ -11,9 +11,11 @@ FILE *output;
 %}
 
 %union {
+  int ival;
   char *sval;
 }
 
+%token <sval> INT
 %token <sval> ID
 %token RECEBA DEVOLVA VIRG EQUAL ADD 
 %token HORADOSHOW
@@ -23,11 +25,12 @@ FILE *output;
 %type <sval> program 
 %type <sval> varlist
 %type <sval> cmd
+%type <sval> cmds
 
 
 %%
 
-program : RECEBA varlist DEVOLVA varlist HORADOSHOW cmd AQUIACABOU {
+program : RECEBA varlist DEVOLVA varlist HORADOSHOW cmds AQUIACABOU {
     char *vl1 = $2;
     char *vl2 = $4;
 
@@ -48,7 +51,7 @@ program : RECEBA varlist DEVOLVA varlist HORADOSHOW cmd AQUIACABOU {
     
     fprintf(output,"int %s;\n",$4);
 
-    fprintf(output,"%s;\n",$6);
+    fprintf(output,"%s\n",$6);
 
     fprintf(output,"return %s;\n}",vl2);
     free($4);
@@ -69,24 +72,59 @@ varlist : varlist VIRG ID {
 
 };
 
+cmds: | cmds cmd {
+    char *buf = malloc(strlen($1) + 2 + strlen($2));
+    strcat(buf,$1);
+    strcat(buf, " ");
+    $$ = strcat(buf,$2);
+    free($1);
+    free($2);
+}
+| cmd {
+    $$ = $1
+};
+
 cmd : 
 | ID EQUAL ID {
-    char *buf = malloc(strlen($1) + 3 + strlen($3));
+    char *buf = malloc(strlen($1) + 3 + strlen($3)+1);
     strcat(buf,$1);
     strcat(buf, " = ");
-    
-    $$ = strcat(buf,$3);
+    strcat(buf,$3);
+    $$ = strcat(buf,";");
     free($1);
     free($3);
 }
 | ID EQUAL ID ADD ID {
-    char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5));
+    char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+1);
     strcat(buf,$1);
     strcat(buf, " = ");
     strcat(buf,$3);
     strcat(buf," + ");
+    strcat(buf,$5);
     
-    $$ = strcat(buf,$5);
+    $$ = strcat(buf,";");
+    free($1);
+    free($3);
+    free($5);
+}
+| ID EQUAL INT {
+    char *buf = malloc(strlen($1) + 3 + strlen($3)+1);
+    strcat(buf,$1);
+    strcat(buf, " = ");
+    strcat(buf,$3);
+    $$ = strcat(buf,";");
+    free($1);
+    free($3);
+} 
+| ID EQUAL ID ADD INT {
+    char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+1);
+    strcat(buf,$1); 
+    strcat(buf, " = ");
+    strcat(buf,$3);
+    strcat(buf," + ");
+    strcat(buf,$5);
+
+    $$ = strcat(buf,";");
     free($1);
     free($3);
     free($5);

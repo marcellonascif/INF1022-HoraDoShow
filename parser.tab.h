@@ -39,25 +39,27 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     ID = 258,
-     RECEBA = 259,
-     DEVOLVA = 260,
-     VIRG = 261,
-     EQUAL = 262,
-     ADD = 263,
-     HORADOSHOW = 264,
-     AQUIACABOU = 265
+     INT = 258,
+     ID = 259,
+     RECEBA = 260,
+     DEVOLVA = 261,
+     VIRG = 262,
+     EQUAL = 263,
+     ADD = 264,
+     HORADOSHOW = 265,
+     AQUIACABOU = 266
    };
 #endif
 /* Tokens.  */
-#define ID 258
-#define RECEBA 259
-#define DEVOLVA 260
-#define VIRG 261
-#define EQUAL 262
-#define ADD 263
-#define HORADOSHOW 264
-#define AQUIACABOU 265
+#define INT 258
+#define ID 259
+#define RECEBA 260
+#define DEVOLVA 261
+#define VIRG 262
+#define EQUAL 263
+#define ADD 264
+#define HORADOSHOW 265
+#define AQUIACABOU 266
 
 
 
@@ -66,10 +68,11 @@
 typedef union YYSTYPE
 #line 13 "parser.y"
 {
+  int ival;
   char *sval;
 }
 /* Line 1529 of yacc.c.  */
-#line 73 "parser.tab.h"
+#line 76 "parser.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

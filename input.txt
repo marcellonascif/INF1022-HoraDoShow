@@ -1,5 +1,6 @@
 RECEBA X,Y 
 DEVOLVA Z 
 HORADOSHOW
-Z = Z + X
+Z = Z + 1
+Z = Z + 2
 AQUIACABOU
