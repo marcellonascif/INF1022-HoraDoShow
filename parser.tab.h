@@ -41,13 +41,23 @@
    enum yytokentype {
      ID = 258,
      RECEBA = 259,
-     DEVOLVA = 260
+     DEVOLVA = 260,
+     VIRG = 261,
+     EQUAL = 262,
+     ADD = 263,
+     HORADOSHOW = 264,
+     AQUIACABOU = 265
    };
 #endif
 /* Tokens.  */
 #define ID 258
 #define RECEBA 259
 #define DEVOLVA 260
+#define VIRG 261
+#define EQUAL 262
+#define ADD 263
+#define HORADOSHOW 264
+#define AQUIACABOU 265
 
 
 
@@ -59,7 +69,7 @@ typedef union YYSTYPE
   char *sval;
 }
 /* Line 1529 of yacc.c.  */
-#line 63 "parser.tab.h"
+#line 73 "parser.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
