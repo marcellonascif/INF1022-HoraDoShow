@@ -10,6 +10,10 @@ AQUIACABOU { return AQUIACABOU; }
 EXECUTE { return EXECUTE; }
 VEZES { return VEZES; }
 FIMEXE { return FIMEXE; }
+SE { return SE; }
+ENTAO { return ENTAO; }
+FIMSE { return FIMSE; }
+SENAO { return SENAO; }
 \+ { return ADD; }
 , { return VIRG; }
 = { return EQUAL; }

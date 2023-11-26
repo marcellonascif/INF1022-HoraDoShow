@@ -23,6 +23,10 @@ FILE *output;
 %token EXECUTE
 %token VEZES
 %token FIMEXE
+%token SE 
+%token ENTAO
+%token FIMSE
+%token SENAO
 
 
 %type <sval> program 
@@ -87,7 +91,7 @@ cmds: | cmds cmd {
     $$ = $1;
 };
 
-cmd : 
+cmd : |
 ID EQUAL ID {
     char *buf = malloc(strlen($1) + 3 + strlen($3)+3);
     strcat(buf,$1);
@@ -140,11 +144,19 @@ ID EQUAL ID {
     free($4);
 }
 | EXECUTE cmds VEZES INT FIMEXE {
-    char *loop = malloc(100);
+    char *loop = malloc(strlen($2)+50);
     sprintf(loop,"for(int i = 0; i < %s; i++){\n%s}",$4,$2);
     $$ = strcat(loop,"");
     free($2);
     free($4);
+}
+| SE ID ENTAO cmd SENAO cmd FIMSE {
+    char *ifstat = malloc(strlen($2)+strlen($4)+strlen($6)+100);
+    sprintf(ifstat,"if(%s){\n%s} else{\n%s}\n",$2,$4,$6);
+    $$ = strcat(ifstat,"");
+    free($2);
+    free($4);
+    free($6);
 };
 
 
@@ -183,5 +195,6 @@ int main(int argc, char* argv[]){
     }
 
     fclose(input);
+    fclose(output);
     return 0;
 }

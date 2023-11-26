@@ -50,7 +50,11 @@
      AQUIACABOU = 266,
      EXECUTE = 267,
      VEZES = 268,
-     FIMEXE = 269
+     FIMEXE = 269,
+     SE = 270,
+     ENTAO = 271,
+     FIMSE = 272,
+     SENAO = 273
    };
 #endif
 /* Tokens.  */
@@ -66,6 +70,10 @@
 #define EXECUTE 267
 #define VEZES 268
 #define FIMEXE 269
+#define SE 270
+#define ENTAO 271
+#define FIMSE 272
+#define SENAO 273
 
 
 
@@ -78,7 +86,7 @@ typedef union YYSTYPE
   char *sval;
 }
 /* Line 1529 of yacc.c.  */
-#line 82 "parser.tab.h"
+#line 90 "parser.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
