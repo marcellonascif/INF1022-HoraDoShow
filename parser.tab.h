@@ -46,15 +46,22 @@
      VIRG = 262,
      EQUAL = 263,
      ADD = 264,
-     HORADOSHOW = 265,
-     AQUIACABOU = 266,
-     EXECUTE = 267,
-     VEZES = 268,
-     FIMEXE = 269,
-     SE = 270,
-     ENTAO = 271,
-     FIMSE = 272,
-     SENAO = 273
+     SUB = 265,
+     MUL = 266,
+     DIV = 267,
+     HORADOSHOW = 268,
+     AQUIACABOU = 269,
+     EXECUTE = 270,
+     VEZES = 271,
+     FIMEXE = 272,
+     SE = 273,
+     ENTAO = 274,
+     FIMSE = 275,
+     SENAO = 276,
+     ENQUANTO = 277,
+     FACA = 278,
+     FIMENQUANTO = 279,
+     COMPARE = 280
    };
 #endif
 /* Tokens.  */
@@ -65,15 +72,22 @@
 #define VIRG 262
 #define EQUAL 263
 #define ADD 264
-#define HORADOSHOW 265
-#define AQUIACABOU 266
-#define EXECUTE 267
-#define VEZES 268
-#define FIMEXE 269
-#define SE 270
-#define ENTAO 271
-#define FIMSE 272
-#define SENAO 273
+#define SUB 265
+#define MUL 266
+#define DIV 267
+#define HORADOSHOW 268
+#define AQUIACABOU 269
+#define EXECUTE 270
+#define VEZES 271
+#define FIMEXE 272
+#define SE 273
+#define ENTAO 274
+#define FIMSE 275
+#define SENAO 276
+#define ENQUANTO 277
+#define FACA 278
+#define FIMENQUANTO 279
+#define COMPARE 280
 
 
 
@@ -86,7 +100,7 @@ typedef union YYSTYPE
   char *sval;
 }
 /* Line 1529 of yacc.c.  */
-#line 90 "parser.tab.h"
+#line 104 "parser.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

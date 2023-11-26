@@ -27,12 +27,17 @@ FILE *output;
 %token ENTAO
 %token FIMSE
 %token SENAO
+%token ENQUANTO
+%token FACA
+%token FIMENQUANTO
+%token COMPARE
 
 
 %type <sval> program 
 %type <sval> varlist
 %type <sval> cmd
 %type <sval> cmds
+%type <sval> expr
 
 
 %%
@@ -235,6 +240,33 @@ ID EQUAL ID {
     free($2);
     free($4);
     free($6);
+}
+| ENQUANTO ID FACA cmds FIMENQUANTO{
+    char *whilestat = malloc(6 + strlen($2) + 1 + strlen($4)+100);
+    sprintf(whilestat,"while(%s){\n%s}\n",$2,$4);
+    $$ = strcat(whilestat,"");
+    free($2);
+    free($4);
+
+}
+| ENQUANTO expr FACA cmds FIMENQUANTO{
+    char *whilestat = malloc(6 + strlen($2) + 1 + strlen($4)+100);
+    sprintf(whilestat,"while(%s){\n%s}\n",$2,$4);
+    $$ = strcat(whilestat,"");
+    free($2);
+    free($4);
+
+};
+
+expr : |
+ID COMPARE ID {
+    char *expr = malloc(strlen($1) + 4 + strlen($3));
+    strcat(expr,$1);
+    strcat(expr, " == ");
+    strcat(expr,$3);
+    $$ = strcat(expr,"");
+    free($1);
+    free($3);
 };
 
 %%
@@ -256,8 +288,8 @@ int main(int argc, char* argv[]){
         return 1;
     }
     output = fopen(argv[2],"w");
-    if (!input) {
-        printf("Error opening input file\n");
+    if (!output) {
+        printf("Error opening output file\n");
         return 1;
     }
 
