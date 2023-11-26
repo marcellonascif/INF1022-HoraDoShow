@@ -15,6 +15,9 @@ ENTAO { return ENTAO; }
 FIMSE { return FIMSE; }
 SENAO { return SENAO; }
 \+ { return ADD; }
+\- { return SUB; }
+\* { return MUL; }
+\/ { return DIV; }
 , { return VIRG; }
 = { return EQUAL; }
 [a-zA-Z]+ { yylval.sval = strdup(yytext); return ID; }

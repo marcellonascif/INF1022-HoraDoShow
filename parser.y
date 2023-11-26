@@ -17,7 +17,7 @@ FILE *output;
 
 %token <sval> INT
 %token <sval> ID
-%token RECEBA DEVOLVA VIRG EQUAL ADD 
+%token RECEBA DEVOLVA VIRG EQUAL ADD SUB MUL DIV 
 %token HORADOSHOW
 %token AQUIACABOU
 %token EXECUTE
@@ -101,6 +101,15 @@ ID EQUAL ID {
     free($1);
     free($3);
 }
+| ID EQUAL INT {
+    char *buf = malloc(strlen($1) + 3 + strlen($3)+1+3);
+    strcat(buf,$1);
+    strcat(buf, " = ");
+    strcat(buf,$3);
+    $$ = strcat(buf,";\n");
+    free($1);
+    free($3);
+}
 | ID EQUAL ID ADD ID {
     char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+3);
     strcat(buf,$1);
@@ -114,21 +123,90 @@ ID EQUAL ID {
     free($3);
     free($5);
 }
-| ID EQUAL INT {
-    char *buf = malloc(strlen($1) + 3 + strlen($3)+1+3);
-    strcat(buf,$1);
-    strcat(buf, " = ");
-    strcat(buf,$3);
-    $$ = strcat(buf,";\n");
-    free($1);
-    free($3);
-} 
 | ID EQUAL ID ADD INT {
     char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+3);
     strcat(buf,$1); 
     strcat(buf, " = ");
     strcat(buf,$3);
     strcat(buf," + ");
+    strcat(buf,$5);
+
+    $$ = strcat(buf,";\n");
+    free($1);
+    free($3);
+    free($5);
+}
+| ID EQUAL ID SUB ID {
+    char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+3);
+    strcat(buf,$1);
+    strcat(buf, " = ");
+    strcat(buf,$3);
+    strcat(buf," - ");
+    strcat(buf,$5);
+    
+    $$ = strcat(buf,";\n");
+    free($1);
+    free($3);
+    free($5);
+}
+| ID EQUAL ID SUB INT {
+    char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+3);
+    strcat(buf,$1); 
+    strcat(buf, " = ");
+    strcat(buf,$3);
+    strcat(buf," - ");
+    strcat(buf,$5);
+
+    $$ = strcat(buf,";\n");
+    free($1);
+    free($3);
+    free($5);
+}
+| ID EQUAL ID MUL ID {
+    char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+3);
+    strcat(buf,$1);
+    strcat(buf, " = ");
+    strcat(buf,$3);
+    strcat(buf," * ");
+    strcat(buf,$5);
+    
+    $$ = strcat(buf,";\n");
+    free($1);
+    free($3);
+    free($5);
+}
+| ID EQUAL ID MUL INT {
+    char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+3);
+    strcat(buf,$1); 
+    strcat(buf, " = ");
+    strcat(buf,$3);
+    strcat(buf," * ");
+    strcat(buf,$5);
+
+    $$ = strcat(buf,";\n");
+    free($1);
+    free($3);
+    free($5);
+} 
+| ID EQUAL ID DIV ID {
+    char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+3);
+    strcat(buf,$1);
+    strcat(buf, " = ");
+    strcat(buf,$3);
+    strcat(buf," / ");
+    strcat(buf,$5);
+    
+    $$ = strcat(buf,";\n");
+    free($1);
+    free($3);
+    free($5);
+}
+| ID EQUAL ID DIV INT {
+    char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5)+3);
+    strcat(buf,$1); 
+    strcat(buf, " = ");
+    strcat(buf,$3);
+    strcat(buf," / ");
     strcat(buf,$5);
 
     $$ = strcat(buf,";\n");
@@ -158,8 +236,6 @@ ID EQUAL ID {
     free($4);
     free($6);
 };
-
-
 
 %%
 
