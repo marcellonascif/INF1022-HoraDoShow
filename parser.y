@@ -96,97 +96,54 @@ cmds: | cmds cmd {
 cmd : |
 ID EQUAL ID {
     char *buf = malloc(strlen($1) + 3 + strlen($3) + 3);
-    strcat(buf,$1);
-    strcat(buf, " = ");
-    strcat(buf,$3);
-    $$ = strcat(buf,";\n");
+    sprintf(buf,"%s = %s;\n", $1, $3);
+    $$ = strcat(buf,"");
 }
 | ID EQUAL INT {
     char *buf = malloc(strlen($1) + 3 + strlen($3) + 3);
-    strcat(buf,$1);
-    strcat(buf, " = ");
-    strcat(buf,$3);
-    $$ = strcat(buf,";\n");
+    sprintf(buf,"%s = %s;\n", $1, $3);
+    $$ = strcat(buf,"");
 }
 | ID EQUAL ID ADD ID {
     char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5) + 3);
-    strcat(buf,$1);
-    strcat(buf, " = ");
-    strcat(buf,$3);
-    strcat(buf," + ");
-    strcat(buf,$5);
-    
-    $$ = strcat(buf,";\n");
+    sprintf(buf,"%s = %s + %s;\n", $1, $3, $5);
+    $$ = strcat(buf,"");
 }
 | ID EQUAL ID ADD INT {
     char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5) + 3);
-    strcat(buf,$1); 
-    strcat(buf, " = ");
-    strcat(buf,$3);
-    strcat(buf," + ");
-    strcat(buf,$5);
+    sprintf(buf,"%s = %s + %s;\n", $1, $3, $5);
+    $$ = strcat(buf,"");
 
-    $$ = strcat(buf,";\n");
 }
 | ID EQUAL ID SUB ID {
     char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5) + 3);
-    strcat(buf,$1);
-    strcat(buf, " = ");
-    strcat(buf,$3);
-    strcat(buf," - ");
-    strcat(buf,$5);
-    
-    $$ = strcat(buf,";\n");
+    sprintf(buf,"%s = %s - %s;\n", $1, $3, $5);
+    $$ = strcat(buf,"");
 }
 | ID EQUAL ID SUB INT {
     char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5) + 3);
-    strcat(buf,$1); 
-    strcat(buf, " = ");
-    strcat(buf,$3);
-    strcat(buf," - ");
-    strcat(buf,$5);
-
-    $$ = strcat(buf,";\n");
+    sprintf(buf,"%s = %s - %s;\n", $1, $3, $5);
+    $$ = strcat(buf,"");
 }
 | ID EQUAL ID MULT ID {
     char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5) + 3);
-    strcat(buf,$1);
-    strcat(buf, " = ");
-    strcat(buf,$3);
-    strcat(buf," * ");
-    strcat(buf,$5);
-    
-    $$ = strcat(buf,";\n");
+    sprintf(buf,"%s = %s * %s;\n", $1, $3, $5);
+    $$ = strcat(buf,"");
 }
 | ID EQUAL ID MULT INT {
     char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5) + 3);
-    strcat(buf,$1); 
-    strcat(buf, " = ");
-    strcat(buf,$3);
-    strcat(buf," * ");
-    strcat(buf,$5);
-
-    $$ = strcat(buf,";\n");
+    sprintf(buf,"%s = %s * %s;\n", $1, $3, $5);
+    $$ = strcat(buf,"");
 } 
 | ID EQUAL ID DIV ID {
     char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5) + 3);
-    strcat(buf,$1);
-    strcat(buf, " = ");
-    strcat(buf,$3);
-    strcat(buf," / ");
-    strcat(buf,$5);
-    
-    $$ = strcat(buf,";\n");
+    sprintf(buf,"%s = %s / %s;\n", $1, $3, $5);
+    $$ = strcat(buf,"");
 }
 | ID EQUAL ID DIV INT {
     char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5) + 3);
-    strcat(buf,$1); 
-    strcat(buf, " = ");
-    strcat(buf,$3);
-    strcat(buf," / ");
-    strcat(buf,$5);
-
-    $$ = strcat(buf,";\n");
+    sprintf(buf,"%s = %s / %s;\n", $1, $3, $5);
+    $$ = strcat(buf,"");
 } 
 | EXECUTE cmds VEZES ID FIMEXE {
     char *loop = malloc(100);
@@ -219,29 +176,27 @@ ID EQUAL ID {
     $$ = strcat(ifstat,"");
 }
 | ENQUANTO ID FACA cmds FIMENQUANTO {
-    char *whilestat = malloc(6 + strlen($2) + 1 + strlen($4) + 2);
+    char *whilestat = malloc(6 + strlen($2) + 1 + strlen($4) + 4);
     sprintf(whilestat,"while(%s){\n%s}\n", $2, $4);
     $$ = strcat(whilestat,"");
 }
 | ENQUANTO expr FACA cmds FIMENQUANTO {
-    char *whilestat = malloc(6 + strlen($2) + 2 + strlen($4) + 2);
+    char *whilestat = malloc(6 + strlen($2) + 2 + strlen($4) + 4);
     sprintf(whilestat,"while(%s){\n%s}\n", $2, $4);
     $$ = strcat(whilestat,"");
-
 }
 | ZERO ABREPAR ID FECHAPAR{
     char *buf = malloc(strlen($3)+6);
-    strcat(buf,$3);
-    strcat(buf," = 0;\n");
+    sprintf(buf,"%s = 0;\n",$3);
     $$ = strcat(buf,"");
 }
 | ESCREVE ABREPAR ID FECHAPAR{
-    char *printstat = malloc(8 + strlen($3) + 4);
+    char *printstat = malloc(8 + strlen($3) + 100);
     sprintf(printstat,"printf(\"%%d\\n\", %s);\n", $3);
     $$ = strcat(printstat,"");
 }
 | ESCREVE ABREPAR INT FECHAPAR{
-    char *printstat = malloc(8 + strlen($3) + 4);
+    char *printstat = malloc(8 + strlen($3) + 100);
     sprintf(printstat,"printf(\"%%d\\n\", %s);\n", $3);
     $$ = strcat(printstat,"");
 };
@@ -249,86 +204,62 @@ ID EQUAL ID {
 expr : |
 ID COMPARE ID {
     char *buf = malloc(strlen($1) + 4 + strlen($3));
-    strcat(buf, $1);
-    strcat(buf, " == ");
-    strcat(buf, $3);
+    sprintf(buf,"%s == %s", $1, $3);
     $$ = strcat(buf,"");
 }
 | ID COMPARE INT {
     char *buf = malloc(strlen($1) + 4 + strlen($3));
-    strcat(buf, $1);
-    strcat(buf, " == ");
-    strcat(buf, $3);
+    sprintf(buf,"%s == %s", $1, $3);
     $$ = strcat(buf,"");
 }
 | ID DIFF ID {
     char *buf = malloc(strlen($1) + 4 + strlen($3));
-    strcat(buf, $1);
-    strcat(buf, " != ");
-    strcat(buf, $3);
+    sprintf(buf,"%s != %s", $1, $3);
     $$ = strcat(buf,"");
 }
 | ID DIFF INT {
     char *buf = malloc(strlen($1) + 4 + strlen($3));
-    strcat(buf, $1);
-    strcat(buf, " != ");
-    strcat(buf, $3);
+    sprintf(buf,"%s != %s", $1, $3);
     $$ = strcat(buf,"");
 }
 | ID GT ID {
     char *buf = malloc(strlen($1) + 4 + strlen($3));
-    strcat(buf, $1);
-    strcat(buf, " > ");
-    strcat(buf, $3);
+    sprintf(buf,"%s > %s", $1, $3);
     $$ = strcat(buf,"");
 }
 | ID GT INT {
     char *buf = malloc(strlen($1) + 4 + strlen($3));
-    strcat(buf, $1);
-    strcat(buf, " > ");
-    strcat(buf, $3);
+    sprintf(buf,"%s > %s", $1, $3);
     $$ = strcat(buf,"");
 }
 | ID LT ID {
     char *buf = malloc(strlen($1) + 4 + strlen($3));
-    strcat(buf, $1);
-    strcat(buf, " < ");
-    strcat(buf, $3);
+    sprintf(buf,"%s < %s", $1, $3);
     $$ = strcat(buf,"");
 }
 | ID LT INT {
     char *buf = malloc(strlen($1) + 4 + strlen($3));
-    strcat(buf, $1);
-    strcat(buf, " < ");
-    strcat(buf, $3);
+    sprintf(buf,"%s < %s", $1, $3);
     $$ = strcat(buf,"");
 }
 | ID GE ID {
     char *buf = malloc(strlen($1) + 4 + strlen($3));
-    strcat(buf, $1);
-    strcat(buf, " >= ");
-    strcat(buf, $3);
+    sprintf(buf,"%s >= %s", $1, $3);
     $$ = strcat(buf,"");
 }
 | ID GE INT {
     char *buf = malloc(strlen($1) + 4 + strlen($3));
-    strcat(buf, $1);
-    strcat(buf, " >= ");
-    strcat(buf, $3);
+    sprintf(buf,"%s >= %s", $1, $3);
     $$ = strcat(buf,"");
 }
 | ID LE ID {
     char *buf = malloc(strlen($1) + 4 + strlen($3));
-    strcat(buf, $1);
-    strcat(buf, " <= ");
-    strcat(buf, $3);
+    sprintf(buf,"%s <= %s", $1, $3);
     $$ = strcat(buf,"");
 }
 | ID LE INT {
     char *buf = malloc(strlen($1) + 4 + strlen($3));
-    strcat(buf, $1);
-    strcat(buf, " <= ");
-    strcat(buf, $3);
+    sprintf(buf,"%s <= %s", $1, $3);
     $$ = strcat(buf,"");
 };
 
