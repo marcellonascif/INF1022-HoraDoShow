@@ -147,9 +147,6 @@ ID EQUAL ID {
     strcat(buf,$5);
 
     $$ = strcat(buf,";\n");
-    free($1);
-    free($3);
-    free($5);
 }
 | ID EQUAL ID MULT ID {
     char *buf = malloc(strlen($1) + 3 + strlen($3) + 3 + strlen($5) + 3);
