@@ -28,7 +28,7 @@ FILE *output;
 %token FIMSE
 %token SENAO
 %token ENQUANTO FACA FIMENQUANTO
-%token ZERO ABREPAR FECHAPAR
+%token ESCREVE ZERO ABREPAR FECHAPAR
 %token COMPARE DIFF GT LT GE LE
 
 
@@ -237,6 +237,16 @@ ID EQUAL ID {
     strcat(buf,$3);
     strcat(buf," = 0;\n");
     $$ = strcat(buf,"");
+}
+| ESCREVE ABREPAR ID FECHAPAR{
+    char *printstat = malloc(8 + strlen($3) + 4);
+    sprintf(printstat,"printf(\"%%d\\n\", %s);\n", $3);
+    $$ = strcat(printstat,"");
+}
+| ESCREVE ABREPAR INT FECHAPAR{
+    char *printstat = malloc(8 + strlen($3) + 4);
+    sprintf(printstat,"printf(\"%%d\\n\", %s);\n", $3);
+    $$ = strcat(printstat,"");
 };
 
 expr : |

@@ -18,6 +18,7 @@ ENQUANTO { return ENQUANTO; }
 FACA { return FACA; }
 FIMENQUANTO { return FIMENQUANTO; }
 ZERO { return ZERO; }
+ESCREVE { return ESCREVE; }
 \( { return ABREPAR; }
 \) { return FECHAPAR; }
 \+ { return ADD; }
