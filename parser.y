@@ -223,7 +223,7 @@ ID EQUAL ID {
 }
 | ENQUANTO ID FACA cmds FIMENQUANTO {
     char *whilestat = malloc(6 + strlen($2) + 1 + strlen($4) + 2);
-    sprintf(whilestat,"while(%s != 0){\n%s}\n", $2, $4);
+    sprintf(whilestat,"while(%s){\n%s}\n", $2, $4);
     $$ = strcat(whilestat,"");
 }
 | ENQUANTO expr FACA cmds FIMENQUANTO {
